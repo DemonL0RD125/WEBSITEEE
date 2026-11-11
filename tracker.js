@@ -50,5 +50,10 @@ export async function incrementVisitorCount(force = false) {
   }
 }
 
+if (!sessionStorage.getItem("global_visit_recorded")) {
+  sessionStorage.setItem("global_visit_recorded", "true");
+
+}
+
 // Automatically track normal page visits on load
 incrementVisitorCount(false);
