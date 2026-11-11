@@ -7,12 +7,15 @@ import {
 
 const db = getFirestore();
 
-export async function incrementVisitorCount(force = false) {
-  // If not forced (like a login event), check session storage
-  if (!force && sessionStorage.getItem("visited_this_session")) {
+export async function incrementVisitorCount() {
+  // Strict global session check: if already tracked in this browser session, exit immediately
+  if (sessionStorage.getItem("dg_site_visitor_counted")) {
     console.log("Visitor already counted this session.");
     return;
   }
+
+  // Lock it instantly before the async transaction starts
+  sessionStorage.setItem("dg_site_visitor_counted", "true");
 
   const now = new Date();
   const dateStr = now.toISOString().split("T")[0];
@@ -43,17 +46,13 @@ export async function incrementVisitorCount(force = false) {
       transaction.set(visitorRef, data);
     });
 
-    sessionStorage.setItem("visited_this_session", "true");
     console.log("Visitor count successfully incremented!");
   } catch (err) {
     console.error("Error updating visitor count:", err);
+    // If it failed due to a network error, remove the flag so they can try counting again
+    sessionStorage.removeItem("dg_site_visitor_counted");
   }
 }
 
-if (!sessionStorage.getItem("global_visit_recorded")) {
-  sessionStorage.setItem("global_visit_recorded", "true");
-
-}
-
-// Automatically track normal page visits on load
-incrementVisitorCount(false);
+// Automatically trigger tracking once when any page containing tracker.js loads
+incrementVisitorCount();
