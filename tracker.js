@@ -7,19 +7,11 @@ import {
 
 const db = getFirestore();
 
-export async function incrementVisitorCount() {
-  const COOLDOWN_TIME = 60 * 60 * 1000; // 1 hour cooldown per visitor
-  const lastVisit = localStorage.getItem("dg_last_visit_timestamp");
-  const nowTime = Date.now();
-
-  // If this browser already counted a visit within the last hour, stop right here
-  if (lastVisit && (nowTime - Number(lastVisit) < COOLDOWN_TIME)) {
-    console.log("Visitor already counted recently within this hour.");
+export async function incrementVisitorCount(force = false) {
+  if (!force && sessionStorage.getItem("visited_this_session")) {
+    console.log("Visitor already counted this session.");
     return;
   }
-
-  // Instantly lock it in localStorage so concurrent script loads fail the check
-  localStorage.setItem("dg_last_visit_timestamp", nowTime.toString());
 
   const now = new Date();
   const dateStr = now.toISOString().split("T")[0];
@@ -50,13 +42,9 @@ export async function incrementVisitorCount() {
       transaction.set(visitorRef, data);
     });
 
-    console.log("Visitor count successfully incremented by 1!");
+    sessionStorage.setItem("visited_this_session", "true");
+    console.log("Visitor count successfully incremented!");
   } catch (err) {
     console.error("Error updating visitor count:", err);
-    // Remove lock if network fails so they can retry later
-    localStorage.removeItem("dg_last_visit_timestamp");
   }
 }
-
-// Automatically trigger tracking once
-incrementVisitorCount();
