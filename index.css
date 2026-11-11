@@ -252,6 +252,23 @@ body {
   color: #E8A317;
 }
 
+.signup-prompt {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+.signup-link {
+  color: white;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.signup-link:hover {
+  color: #E8A317;
+}
+
 .back-link {
   display: inline-block;
   margin-top: 12px;
