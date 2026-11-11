@@ -1,0 +1,226 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #0A1930;
+  color: white;
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.5;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  height: 100vh;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(10, 25, 48, 0.55), rgba(10, 25, 48, 0.55)), url('https://images.unsplash.com/photo-1682778418768-16081e4470a1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudCUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D');
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+}
+
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #E8A317;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  line-height: 1.3333;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.top-nav a {
+  color: white;
+  transition: color 0.3s;
+}
+
+.top-nav a:hover {
+  color: #E8A317;
+}
+
+.hero {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 96px 20px;
+  text-align: center;
+}
+
+.hero-label {
+  width: 100%;
+  margin-bottom: 20px;
+  padding-left: 0.4em;
+  color: #E8A317;
+  font-size: 12px;
+  line-height: 1.3333;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+
+.hero-title {
+  width: 100%;
+  max-width: 64rem;
+  color: white;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, min(6vw, 9vh), 4.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.menu-btn {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 12px 40px 12px calc(2.5rem + 0.25em);
+  border: 2px solid #E8A317;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  line-height: 1.4286;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  transition: all 0.3s;
+}
+
+.menu-btn:hover {
+  background-color: #E8A317;
+  color: #0A1930;
+  box-shadow: 0 0 25px rgba(232, 163, 23, 0.5);
+}
+
+.footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 32px;
+  width: 100%;
+  padding: 48px 20px;
+  border-top: 1px solid rgba(232, 163, 23, 0.4);
+  background-color: #06101F;
+  text-align: center;
+}
+
+.footer-title {
+  color: #E8A317;
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.footer-text {
+  margin-top: 8px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.footer-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 20px;
+  border: 1px solid #E8A317;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  line-height: 1.4286;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.footer-btn:hover {
+  background-color: #E8A317;
+  color: #0A1930;
+}
+
+@media (min-width: 640px) {
+  .top-bar {
+    padding: 16px 40px;
+  }
+
+  .logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .top-nav {
+    gap: 40px;
+    font-size: 14px;
+    line-height: 1.4286;
+  }
+
+  .hero-label {
+    font-size: 14px;
+    line-height: 1.4286;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+}

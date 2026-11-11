@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DG'S RESTAURANT</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <a href="home.html">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT49MUAtyVv0DbccQaw7QUYANTXtJUIivwymSep_3dp9g&s=10" alt="DG's Restaurant logo" class="logo">
+      </a>
+      <span class="admin-badge">Admin Dashboard</span>
+    </div>
+
+    <div class="nav-dropdown-container">
+      <button type="button" id="menu-dropdown-btn" class="menu-dropdown-btn">Menu ▾</button>
+      <div id="nav-dropdown-content" class="nav-dropdown-content hidden">
+        <a href="admin.html" style="color: #E8A317;">Manage Dishes</a>
+        <a href="orders.html">Pending Orders</a>
+        <a href="history.html">Order History</a>
+        <a href="sales.html">Sales Analytics</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-category-bar">
+    <button type="button" data-category="foods" class="cat-btn active">Foods</button>
+    <button type="button" data-category="drinks" class="cat-btn">Drinks</button>
+    <button type="button" data-category="desserts" class="cat-btn">Desserts</button>
+  </div>
+
+  <main class="admin-main">
+    <div class="admin-container">
+      
+      <div class="admin-header-row">
+        <h1 id="active-category-title" class="admin-title">Manage Foods</h1>
+        <button type="button" id="open-add-modal-btn" class="add-dish-btn">+ Add New Dish</button>
+      </div>
+
+      <div id="admin-dish-grid" class="admin-dish-grid">
+        <p class="loading-text">Loading items from Firestore...</p>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="dish-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button type="button" id="modal-close-btn" class="modal-close-btn">&times;</button>
+      <h2 id="modal-title" class="modal-title">Add New Dish</h2>
+      
+      <form id="dish-form" class="dish-form">
+        <input type="hidden" id="dish-id">
+
+        <div class="form-group">
+          <label for="dish-category-select">Main Category</label>
+          <select id="dish-category-select" class="form-input" required>
+            <option value="foods">Foods</option>
+            <option value="drinks">Drinks</option>
+            <option value="desserts">Desserts</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="dish-subcategory-select">Sub-Category / Section</label>
+          <select id="dish-subcategory-select" class="form-input" required>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="dish-name-input">Dish Name</label>
+          <input type="text" id="dish-name-input" class="form-input" placeholder="e.g. Chicken Adobo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dish-price-input">Price (₱)</label>
+          <input type="number" id="dish-price-input" class="form-input" placeholder="e.g. 150" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dish-img-input">Picture URL</label>
+          <input type="url" id="dish-img-input" class="form-input" placeholder="https://example.com/image.jpg" required>
+        </div>
+
+        <button type="submit" id="save-dish-btn" class="save-btn">Save Dish</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DG'S RESTAURANT</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <a href="home.html">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT49MUAtyVv0DbccQaw7QUYANTXtJUIivwymSep_3dp9g&s=10" alt="DG's Restaurant logo" class="logo">
+      </a>
+
+      <!-- Navigation buttons placed beside the logo -->
+      <nav class="top-nav">
+        <a href="about.html">About Us</a>
+        <a href="branches.html">Branches</a>
+        <a href="menu.html" class="active">Menu</a>
+      </nav>
+    </div>
+
+    <!-- Top Right Cart Button -->
+    <button type="button" id="cart-toggle-btn" class="cart-icon-btn" aria-label="Shopping Cart">
+      <svg class="cart-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span id="cart-count" class="cart-count">0</span>
+    </button>
+  </header>
+
+  <section class="banner">
+    <div class="banner-bg"></div>
+    <div class="banner-text">
+      <p class="banner-label">DG'S RESTAURANT</p>
+      <h1 class="banner-title">Menu</h1>
+    </div>
+  </section>
+
+  <div class="menu-layout">
+    <button type="button" id="sidebar-toggle" class="toggle-btn">&#9776; Categories</button>
+
+    <aside id="sidebar" class="sidebar hidden">
+      <nav class="sidebar-nav">
+        <button type="button" data-target="foods" class="tab-btn active">Foods</button>
+        <button type="button" data-target="drinks" class="tab-btn">Drinks</button>
+        <button type="button" data-target="desserts" class="tab-btn">Desserts</button>
+      </nav>
+    </aside>
+
+    <main class="menu-main">
+      <div class="menu-wrap">
+        
+        <section id="foods" class="tab-section">
+          <div class="menu-card">
+            <h2 class="menu-title">Beef</h2>
+            <div class="dish-grid" data-subcategory="Beef"></div>
+          </div>
+
+          <div class="menu-card">
+            <h2 class="menu-title">Pork</h2>
+            <div class="dish-grid" data-subcategory="Pork"></div>
+          </div>
+
+          <div class="menu-card">
+            <h2 class="menu-title">Chicken</h2>
+            <div class="dish-grid" data-subcategory="Chicken"></div>
+          </div>
+
+          <div class="menu-card">
+            <h2 class="menu-title">Salad</h2>
+            <div class="dish-grid" data-subcategory="Salad"></div>
+          </div>
+        </section>
+
+        <section id="drinks" class="tab-section hidden">
+          <div class="menu-card">
+            <h2 class="menu-title">Drinks</h2>
+            <div class="dish-grid" data-subcategory="Drinks"></div>
+          </div>
+
+          <div class="menu-card">
+            <h2 class="menu-title">Fresh Fruit Shakes</h2>
+            <div class="dish-grid" data-subcategory="Fresh Fruit Shakes"></div>
+          </div>
+
+          <div class="menu-card">
+            <h2 class="menu-title">Signature Coolers &amp; Mocktails (Specialty)</h2>
+            <div class="dish-grid" data-subcategory="Signature Coolers & Mocktails (Specialty)"></div>
+          </div>
+
+          <div class="menu-card">
+            <h2 class="menu-title">Wine (Per Bottle)</h2>
+            <div class="dish-grid" data-subcategory="Wine (Per Bottle)"></div>
+          </div>
+        </section>
+
+        <section id="desserts" class="tab-section hidden">
+          <div class="menu-card">
+            <h2 class="menu-title">Cakes</h2>
+            <div class="dish-grid" data-subcategory="Cakes"></div>
+          </div>
+
+          <div class="menu-card">
+            <h2 class="menu-title">Desserts</h2>
+            <div class="dish-grid" data-subcategory="Desserts"></div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="cart-modal" class="cart-modal hidden">
+    <div class="cart-modal-overlay"></div>
+    <div class="cart-modal-content">
+      <button type="button" id="cart-close-btn" class="cart-close-btn">&times;</button>
+      <h2 class="cart-modal-title">Your Order Cart</h2>
+      
+      <div class="cart-split-container">
+        <div class="cart-left-pane">
+          <h3 class="pane-title">Selected Dishes</h3>
+          <div id="cart-items-list" class="cart-items-list">
+            <p class="empty-cart-text">Your cart is empty.</p>
+          </div>
+          <div class="cart-total-box">
+            <span>Total:</span>
+            <span id="cart-total-price">₱0</span>
+          </div>
+        </div>
+
+        <div class="cart-right-pane">
+          <h3 class="pane-title">Delivery Details</h3>
+          <form id="order-form" class="order-form">
+            <div class="form-group">
+              <label for="order-name">Name</label>
+              <input type="text" id="order-name" class="form-input" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="order-mobile">Mobile Number</label>
+              <input type="tel" id="order-mobile" class="form-input" placeholder="09123456789" required>
+            </div>
+            <div class="form-group">
+              <label for="order-address">Address</label>
+              <textarea id="order-address" class="form-input form-textarea" placeholder="Enter delivery address" rows="3" required></textarea>
+            </div>
+            <button type="submit" id="order-submit-btn" class="order-btn">Order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div>
+      <h2 class="footer-title">Contact Us</h2>
+      <p class="footer-text">(63+) 9068676619</p>
+      <div class="footer-links">
+        <a href="https://www.facebook.com/share/17qxEoa7Ds/" class="footer-btn">Facebook</a>
+        <a href="#" class="footer-btn">Instagram</a>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="footer-title">Visit Us</h2>
+      <p class="footer-text">Lopez Jaena Street, Brgy. Talaban, Himamaylan City</p>
+      <p>Mon - Sat: 7:00 AM to 12:00 AM</p>
+    </div>
+  </footer>
+
+  <script type="module" src="tracker.js"></script>
+  <script type="module" src="menu.js"></script>
+</body>
+</html>

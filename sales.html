@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DG'S RESTAURANT</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="sales.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <a href="home.html">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT49MUAtyVv0DbccQaw7QUYANTXtJUIivwymSep_3dp9g&s=10" alt="DG's Restaurant logo" class="logo">
+      </a>
+      <span class="admin-badge">Sales Analytics</span>
+    </div>
+
+    <!-- Top-Right Dropdown Menu Button -->
+    <div class="nav-dropdown-container">
+      <button type="button" id="menu-dropdown-btn" class="menu-dropdown-btn">Menu ▾</button>
+      <div id="nav-dropdown-content" class="nav-dropdown-content hidden">
+        <a href="sales.html" style="color: #E8A317;">Sales Analytics</a>
+        <a href="orders.html">Pending Orders</a>
+        <a href="history.html">Order History</a>
+        <a href="admin.html">Manage Dishes</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="sales-main">
+    <div class="sales-container">
+      
+      <div class="sales-header-row">
+        <h1 class="sales-title">Sales</h1>
+        <div class="filter-group">
+          <label for="time-filter">View Mode:</label>
+          <select id="time-filter" class="form-input">
+            <option value="day">By Day</option>
+            <option value="month">By Month</option>
+            <option value="year">By Year</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <h3 class="kpi-title">Total Visitors</h3>
+          <p id="total-visitors-count" class="kpi-value">0</p>
+        </div>
+        <div class="kpi-card">
+          <h3 class="kpi-title">Total Orders</h3>
+          <p id="total-orders-count" class="kpi-value">0</p>
+        </div>
+      </div>
+
+      <div class="charts-top-row">
+        
+        <div class="chart-card">
+          <div class="chart-header-flex">
+            <div>
+              <h2 class="chart-title">Purchases Overview</h2>
+              <p class="chart-subtitle">Cumulative monetary sum</p>
+            </div>
+            <div class="chart-total-badge">
+              <span class="chart-total-label">Total Revenue:</span>
+              <span id="total-revenue-value" class="chart-total-amount">₱0</span>
+            </div>
+          </div>
+          <div class="canvas-container compact-canvas">
+            <canvas id="purchasesChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h2 class="chart-title">Top Selling Dishes</h2>
+          <div class="canvas-container-pie compact-canvas">
+            <canvas id="dishesPieChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="chart-card chart-bottom-row">
+        <h2 class="chart-title">Visits</h2>
+        <div class="canvas-container compact-canvas">
+          <canvas id="visitorsChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script type="module" src="sales.js"></script>
+</body>
+</html>

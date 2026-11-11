@@ -1,0 +1,361 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+svg {
+  display: block;
+}
+
+button {
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #0A1930;
+  color: white;
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.5;
+}
+
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #E8A317;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.top-nav a {
+  color: white;
+  transition: color 0.3s;
+}
+
+.top-nav a:hover {
+  color: #E8A317;
+}
+
+.top-nav a.active {
+  color: #E8A317;
+}
+
+.banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45vh;
+  min-height: 320px;
+  padding: 64px 20px 0;
+  text-align: center;
+}
+
+.banner-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(10, 25, 48, 0.55), rgba(10, 25, 48, 0.55)), url('https://images.unsplash.com/photo-1682778418768-16081e4470a1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudCUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D');
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+}
+
+.banner-text {
+  position: relative;
+  z-index: 10;
+}
+
+.banner-label {
+  margin-bottom: 12px;
+  padding-left: 0.4em;
+  color: #E8A317;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+
+.banner-title {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 700;
+}
+
+.branches-main {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+}
+
+.intro {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.intro-text {
+  max-width: 36rem;
+  margin: 0 auto 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.map-btn {
+  padding: 12px 40px;
+  border: 2px solid #E8A317;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  transition: all 0.3s;
+}
+
+.map-btn:hover {
+  background-color: #E8A317;
+  color: #0A1930;
+  box-shadow: 0 0 25px rgba(232, 163, 23, 0.5);
+}
+
+.map-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.branch-list {
+  padding: 24px;
+  border: 1px solid rgba(232, 163, 23, 0.4);
+  border-radius: 6px;
+  background-color: black;
+}
+
+.region-title {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: #E8A317;
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.region-title:first-child {
+  margin-top: 0;
+}
+
+.branch-btn {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: white;
+  text-align: left;
+  transition: color 0.3s;
+}
+
+.branch-btn:hover {
+  color: #E8A317;
+}
+
+.map-box {
+  overflow: hidden;
+  border: 1px solid rgba(232, 163, 23, 0.4);
+  border-radius: 6px;
+  background-color: black;
+}
+
+.map {
+  width: 100%;
+  height: 70vh;
+  min-height: 420px;
+}
+
+.leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
+}
+
+.leaflet-container {
+  background: #0a1930;
+  font-family: "DM Sans", sans-serif;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #e8a317;
+}
+
+.leaflet-popup-content strong {
+  color: #e8a317;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: #e8a317;
+}
+
+.footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 32px;
+  width: 100%;
+  padding: 48px 20px;
+  border-top: 1px solid rgba(232, 163, 23, 0.4);
+  background-color: #06101F;
+  text-align: center;
+}
+
+.footer-title {
+  color: #E8A317;
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.footer-text {
+  margin-top: 8px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.footer-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 20px;
+  border: 1px solid #E8A317;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.footer-btn:hover {
+  background-color: #E8A317;
+  color: #0A1930;
+}
+
+@media (min-width: 640px) {
+  .top-bar {
+    padding: 16px 40px;
+  }
+
+  .logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .top-bar-left {
+    gap: 40px;
+  }
+
+  .top-nav {
+    gap: 40px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .banner-label {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .banner-title {
+    font-size: 60px;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .map-grid {
+    grid-template-columns: 18rem 1fr;
+  }
+}
+
+.hidden {
+  display: none;
+}

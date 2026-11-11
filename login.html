@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DG'S RESTAURANT</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div class="hero-bg"></div>
+
+  <header class="top-bar">
+    <a href="home.html">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT49MUAtyVv0DbccQaw7QUYANTXtJUIivwymSep_3dp9g&s=10" alt="DG's Restaurant logo" class="logo">
+    </a>
+
+    <nav class="top-nav">
+      <a href="about.html">About Us</a>
+      <a href="branches.html">Branches</a>
+      <a href="menu.html">Menu</a>
+    </nav>
+  </header>
+
+  <main class="login-main">
+    <div class="login-card">
+      <p class="login-label">DG'S RESTAURANT</p>
+      <h1 class="login-title">Welcome Back</h1>
+      <p class="login-sub">Log in to your account to continue.</p>
+
+      <form id="login-form" class="login-form">
+        <label for="email" class="field-label">Email</label>
+        <input type="email" id="email" class="field" placeholder="you@example.com" autocomplete="email" required>
+
+        <label for="password" class="field-label">Password</label>
+        <div class="password-box">
+          <input type="password" id="password" class="field" placeholder="Enter your password" autocomplete="current-password" required>
+          <button type="button" id="show-password" class="show-btn">Show</button>
+        </div>
+
+        <p id="message" class="message"></p>
+
+        <button type="submit" id="login-btn" class="login-btn">Log In</button>
+      </form>
+
+      <button type="button" id="forgot-btn" class="link-btn">Forgot password?</button>
+      <p>Don't have an account? <a href="signup1.html">Sign up</a></p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <h2 class="footer-title">Contact Us</h2>
+      <p class="footer-text">(63+) 9068676619</p>
+      <div class="footer-links">
+        <a href="https://www.facebook.com/share/17qxEoa7Ds/" class="footer-btn">Facebook</a>
+        <a href="#" class="footer-btn">Instagram</a>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="footer-title">Visit Us</h2>
+      <p class="footer-text">Lopez Jaena Street, Brgy. Talaban, Himamaylan City</p>
+      <p>Mon - Sat: 7:00 AM to 12:00 AM</p>
+    </div>
+  </footer>
+
+  <script type="module" src="login.js"></script>
+</body>
+</html>
