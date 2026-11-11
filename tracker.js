@@ -8,14 +8,18 @@ import {
 const db = getFirestore();
 
 export async function incrementVisitorCount() {
-  // Strict global session check: if already tracked in this browser session, exit immediately
-  if (sessionStorage.getItem("dg_site_visitor_counted")) {
-    console.log("Visitor already counted this session.");
+  const COOLDOWN_TIME = 60 * 60 * 1000; // 1 hour cooldown per visitor
+  const lastVisit = localStorage.getItem("dg_last_visit_timestamp");
+  const nowTime = Date.now();
+
+  // If this browser already counted a visit within the last hour, stop right here
+  if (lastVisit && (nowTime - Number(lastVisit) < COOLDOWN_TIME)) {
+    console.log("Visitor already counted recently within this hour.");
     return;
   }
 
-  // Lock it instantly before the async transaction starts
-  sessionStorage.setItem("dg_site_visitor_counted", "true");
+  // Instantly lock it in localStorage so concurrent script loads fail the check
+  localStorage.setItem("dg_last_visit_timestamp", nowTime.toString());
 
   const now = new Date();
   const dateStr = now.toISOString().split("T")[0];
@@ -46,13 +50,13 @@ export async function incrementVisitorCount() {
       transaction.set(visitorRef, data);
     });
 
-    console.log("Visitor count successfully incremented!");
+    console.log("Visitor count successfully incremented by 1!");
   } catch (err) {
     console.error("Error updating visitor count:", err);
-    // If it failed due to a network error, remove the flag so they can try counting again
-    sessionStorage.removeItem("dg_site_visitor_counted");
+    // Remove lock if network fails so they can retry later
+    localStorage.removeItem("dg_last_visit_timestamp");
   }
 }
 
-// Automatically trigger tracking once when any page containing tracker.js loads
+// Automatically trigger tracking once
 incrementVisitorCount();
