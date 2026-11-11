@@ -9,7 +9,6 @@ import {
 
 const db = getFirestore();
 
-// Dropdown Menu Toggle Script
 const menuDropdownBtn = document.getElementById("menu-dropdown-btn");
 const navDropdownContent = document.getElementById("nav-dropdown-content");
 
@@ -26,10 +25,15 @@ if (menuDropdownBtn && navDropdownContent) {
   });
 }
 
+let hasTrackedThisSession = false;
+
 async function trackVisitor() {
-  if (sessionStorage.getItem("visited_this_session")) {
+  if (hasTrackedThisSession || sessionStorage.getItem("visited_this_session")) {
     return;
   }
+
+  hasTrackedThisSession = true;
+  sessionStorage.setItem("visited_this_session", "true");
 
   const now = new Date();
   const dateStr = now.toISOString().split("T")[0];
@@ -59,10 +63,10 @@ async function trackVisitor() {
 
       transaction.set(visitorRef, data);
     });
-
-    sessionStorage.setItem("visited_this_session", "true");
   } catch (err) {
     console.error("Error updating visitor count:", err);
+    hasTrackedThisSession = false;
+    sessionStorage.removeItem("visited_this_session");
   }
 }
 
@@ -76,7 +80,6 @@ const timeFilterSelect = document.getElementById("time-filter");
 
 async function fetchAndRenderDashboard() {
   try {
-    // Fetch dishes first so we can map dish names to their main category (foods, drinks, desserts)
     const dishesSnapshot = await getDocs(collection(db, "dishes"));
     const dishCategoryMap = {};
     dishesSnapshot.forEach(docSnap => {
@@ -91,7 +94,6 @@ async function fetchAndRenderDashboard() {
 
     ordersSnapshot.forEach(docSnap => {
       const orderData = docSnap.data();
-      // Only count orders that have been explicitly accepted[cite: 7]
       if (orderData.status === "accepted") {
         acceptedOrders.push(orderData);
       }
@@ -139,7 +141,6 @@ async function fetchAndRenderDashboard() {
           const qty = item.quantity || 1;
           const lookupName = name.trim().toLowerCase();
           
-          // Determine category based on Firestore dishes collection, default to 'foods'
           const cat = dishCategoryMap[lookupName] || "foods";
           if (categoryItemCounts[cat]) {
             categoryItemCounts[cat][name] = (categoryItemCounts[cat][name] || 0) + qty;
@@ -148,12 +149,11 @@ async function fetchAndRenderDashboard() {
       }
     });
 
-    // Extract top 3 items for each category
     const topDishes = [];
     Object.keys(categoryItemCounts).forEach(cat => {
       const sortedCatItems = Object.entries(categoryItemCounts[cat])
         .sort((a, b) => b[1] - a[1])
-        .slice(0, 3); // Take top 3 per category
+        .slice(0, 3); 
       
       sortedCatItems.forEach(([name, count]) => {
         topDishes.push({ name, count, category: cat });
@@ -225,10 +225,9 @@ function renderDishesPieChart(topDishes) {
   const labels = topDishes.map(item => `${item.name} (${item.category.toUpperCase()})`);
   const values = topDishes.map(item => item.count);
 
-  // Generate strictly unique colors across the color wheel so no two slices share the same hue
   const backgroundColors = labels.map((_, index, arr) => {
     if (index === 0) {
-      return '#E8A317'; // Absolute #1 top seller gets your signature Gold
+      return '#E8A317'; 
     }
     const hue = Math.round((index / arr.length) * 360);
     return `hsl(${hue}, 75%, 52%)`;
